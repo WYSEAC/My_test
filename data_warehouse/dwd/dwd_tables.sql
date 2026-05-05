@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS dwd.dwd_dim_user_info (
     user_id         BIGINT          COMMENT '用户ID',
     user_name       STRING          COMMENT '用户姓名',
     gender          STRING          COMMENT '性别(男/女/未知)',
-    age             INT             COMMENT '年龄段',
+    age             INT             COMMENT '年龄',
     age_range       STRING          COMMENT '年龄段分组',
     phone           STRING          COMMENT '手机号(脱敏)',
     email           STRING          COMMENT '邮箱(脱敏)',
@@ -56,7 +56,7 @@ SELECT
     r.region_name,
     1 AS is_valid
 FROM ods.ods_user_info u
-LEFT JOIN ods.ods_region_info r ON u.region_id = r.region_id
+LEFT JOIN ods.ods_region_info r ON u.region_id = r.region_id AND r.dt = '${dt}'
 WHERE u.dt = '${dt}';
 
 -- =====================================================
